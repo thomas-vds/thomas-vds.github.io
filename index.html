@@ -3,6 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Hello Github Pages</title>
+    <style>
+        body{
+            padding:0;
+            margin:0;
+        }
+        a{
+            text-decoration: none;
+            text-underline: none;
+            color:inherit;
+            font-family: Serif;
+            font-size: 20pt;
+            padding: 1em;
+            border: solid crimson 1px;
+        }
+        #main-container{
+            width: inherit;
+            height: inherit;
+        }
+        aside{
+            margin:0;
+            padding: 5em;
+            width: 100%;
+            background-color: indianred;
+            color: crimson;
+        }
+        section header{
+            margin: 0px;
+            padding: 5em;
+            color: lawngreen;
+            background-color: mediumseagreen;
+            max-width: 50%;
+            height: 10em;
+            font-family: monospace;
+            float: left;
+        }
+        section article{
+            margin: 0px;
+            padding: 2.5em;
+            color: white;
+            background-color: gainsboro;
+            max-width: 50%;
+            height: 10em;
+            font-family: monospace;
+            font-size: 20pt;
+            float: left;
+            text-space: 2pt;
+        }
+        footer{
+            clear: both;
+        }
+    </style>
 </head>
 <body>
     <div id="main-container">
@@ -13,14 +64,19 @@
             <!-- links to blogs, channels,.. -->
         </aside>
         <section>
-            <header><h2>Thomas Van den Steen</h2></header>
-            <h4><i>Java, Javascript, html, css, sql, hibernate,..</i></h4>
-            <p>
-                Hello, welcome to my webpage/portfolio i hope you like it here.
-                Get updated with what i'm doing in the sidebar to the left,
-                click my face to learn more about me
-                or scroll down below to get to the interactive part
-            </p>
+            <header>
+                <h2>Thomas Van den Steen</h2>
+                <h4><i>Java, Javascript, html, css, sql, hibernate,..</i></h4>
+            </header>
+
+            <article>
+                <p>
+                    Hello, welcome to my webpage/portfolio i hope you like it here.
+                    Get updated with what i'm doing in the sidebar to the left,
+                    click my face to learn more about me
+                    or scroll down below to get to the interactive part
+                </p>
+            </article>
         </section>
     </div>
     <footer> Made by me </footer>
