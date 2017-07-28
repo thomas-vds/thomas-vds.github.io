@@ -1,112 +1,97 @@
 var canvas = document.getElementById("demo1-canvas");
 var ctx = canvas.getContext("2d");
-
-var startButton = document.getElementById("demo1-start-button");
-var stopButton = document.getElementById("demo1-stop-button");
-var resetButton = document.getElementById("demo1-reset-button");
+var canvasPosition;
 
 canvas.width = window.innerWidth-95;
 canvas.height = 600;
 
 canvas.style.border = "5pt solid Indianred";
-canvas.style.padding = "2em";
 
-function Circle(x,y,vx,vy){
-    this.x = x;
-    this.y = y;
-    this.vx = vx;
-    this.vy = vy;
-    this.w = 50;
-    this.h = 50;
-    this.color = "blue";
-    this.draw = function(){
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.moveTo(x,y);
-        ctx.arc(this.x,this.y,this.w,0,2*Math.PI);
-        ctx.fill();
-    }
-    this.update = function(){
-        this.x += this.vx;
-        this.y += this.vy;
+function getPosition(element){
+    var xPos = 0;
+    var yPos = 0;
 
-        // Collision
-        if(this.x - this.w < 0){
-            this.vx *= -1;
+    while (element) {
+        if (element.tagName == "BODY") {
+            // deal with browser quirks with body/window/document and page scroll
+            var xScroll = element.scrollLeft || document.documentElement.scrollLeft;
+            var yScroll = element.scrollTop || document.documentElement.scrollTop;
+
+            xPos += (element.offsetLeft - xScroll + element.clientLeft);
+            yPos += (element.offsetTop - yScroll + element.clientTop);
+        } else {
+            // for all other non-BODY elements
+            xPos += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+            yPos += (element.offsetTop - element.scrollTop + element.clientTop);
         }
-        if(this.x + this.w > canvas.width){
-            this.vx *= -1;
-        }
-        if(this.y - this.w < 0){
-            this.vy *= -1;
-        }
-        if(this.y + this.h > canvas.height){
-            this.vy *= -1;
-        }
+
+        element = element.offsetParent;
     }
+    return {
+        x: xPos,
+        y: yPos
+    };
+}
+
+function updatePosition(){
+    canvasPosition = getPosition(canvas);
+}
+
+var mouse = {
+    dx:0,
+    dy:0,
+    down:false
 }
 
 var running = false;
 var interval;
-var renderstack = [];
-
-// create circles
-function createCircles(amount){
-    var randomX, randomY,randomVX,randomVY;
-    for(var i=0;i<amount;i++){
-        randomX = Math.round(Math.random()* (canvas.width - 100)) + 50;
-        randomY = Math.round(Math.random()* (canvas.height - 100)) + 50;
-        randomVX = Math.round(Math.random()*4)-2;
-        randomVY = Math.round(Math.random()*4)-2;
-        // objects added to this array are rendered on screen
-        renderstack.push(new Circle(randomX,randomY,randomVX,randomVY));
-    }
-}
 
 function init(){
-    createCircles(10);
+    ctx.fillStyle = "Mediumseagreen";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
 }init();
 
-function drawAll(){
-    renderstack.forEach(function(e){e.draw()});
-}
-function updateAll(){
-    renderstack.forEach(function (e) {e.update()});
+function renderAll(){
+    if (mouse.down){
+        ctx.clearRect(mouse.dx - canvasPosition.x,mouse.dy - canvasPosition.y,50,50);
+    }
+    canvasPosition = getPosition(canvas);
 }
 
 function start(){
     if(running === false){
-        interval = window.setInterval(renderAll,1000/30);
+        interval = window.setInterval(renderAll,1000/60);
         running = true;
+        console.log("started");
     }
 }
+
 function stop(){
     if(running){
         window.clearInterval(interval);
         running = false;
+        console.log("stopped");
     }
 }
 
-function reset(){
-    stop();
-    renderstack = [];
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    createCircles(10);
-}
-
-function renderAll(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    drawAll();
-    updateAll();
-}
-
 // EVENT listeners
-startButton.addEventListener("mouseup",function (e) {
+canvas.addEventListener("mousedown",function (e) {
+    e.preventDefault();
+    mouse.down = true;
+});
+canvas.addEventListener("mouseup",function (e) {
+    e.preventDefault();
+    mouse.down = false;
+});
+canvas.addEventListener("mousemove",function (e){
+    mouse.dx = e.clientX;
+    mouse.dy = e.clientY;
+});
+canvas.addEventListener("mouseenter",function(e){
     start();
 });
-stopButton.addEventListener("mouseup",function (e) {
-   stop();
+canvas.addEventListener("mouseleave",function(e){
+    stop();
 });
-resetButton.addEventListener("mouseup",function (e) {
-   reset();
-});
+document.addEventListener("scroll", updatePosition,false);
+document.addEventListener("resize", updatePosition,false);

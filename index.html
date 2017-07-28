@@ -8,7 +8,7 @@
             padding:0;
             margin:0;
         }
-        aside a{
+        aside .showoff{
             text-decoration: none;
             text-underline: none;
             color:inherit;
@@ -16,6 +16,14 @@
             font-size: 20pt;
             padding: 1em;
             border: solid crimson 1px;
+        }
+        #language-selectors{
+            position: absolute;
+            top:1em;
+            right: 1em;
+            background-color: wheat;
+            padding: 0.5em;
+            border-radius: 1em;
         }
         #main-container{
             width: inherit;
@@ -54,9 +62,11 @@
             padding: 2.5em;
             color: maroon;
             background-color: whitesmoke;
-            height: 10em;
             font-family: monospace;
             font-size: 15pt;
+        }
+        #about{
+            margin: 2em;
         }
         section article p {
             text-space: 5pt;
@@ -64,6 +74,7 @@
         }
         #demo1-canvas{
             background-color: silver;
+            margin: 2em;
         }
         footer{
             clear: both;
@@ -74,37 +85,103 @@
     <div id="main-container">
         <aside id="aside">
             <!-- links to projects -->
-            <a href="#">a link</a>
-            <a href="#">another link to some fresh content</a>
+            <a href="#" class="showoff">a link</a>
+            <a href="#" class="showoff">another link to some fresh content</a>
             <!-- links to blogs, channels,.. -->
+            <!-- Language selector -->
+            <div id="language-selectors">
+                <a href="#" id="language-english">English</a>
+                <br>
+                <a href="#" id="language-dutch">Nederlands</a>
+            </div>
         </aside>
         <section>
             <header id="header">
-                <a href="#"><img id="profile" src="res/profile.jpg"/></a>
+                <a href="#about"><img id="profile" src="res/profile.jpg"/></a>
                 <h2>Thomas Van den Steen</h2>
                 <h4><i>Java, Javascript, html, css, sql, hibernate,..</i></h4>
                 <div id="social">
-                    <a href="#"><img src="res/facebook.png"/></a>
-                    <a href="#"><img src="res/twitter.png"/></a>
-                    <a href="#"><img src="res/gitlab.png"/></a>
-                    <a href="#"><img src="res/github.png"/></a>
+                    <a href="https://www.facebook.com/thomas.vandensteen.3"><img src="res/facebook.png"/></a>
+                    <a href="https://twitter.com/Th0m4sVdS"><img src="res/twitter.png"/></a>
+                    <a href="https://gitlab.com/NeuroTypicalCure"><img src="res/gitlab.png"/></a>
+                    <a href="https://github.com/NeuroTypicalCure"><img src="res/github.png"/></a>
                 </div>
             </header>
 
             <article id="welcome">
                 <p>
                     Hello, <br>
-                    Welcome to my webpage/portfolio:<br>
-                    - Get updated with what i'm doing in the sidebar to the left<br>
-                    - Click my face to learn more about me<br>
-                    - Scroll down below to get to the interactive part
+                    Welcome to my webpage/portfolio<br>
+                    Looking for something specific?<br>
+                    <input size="20" placeholder="          Search away ;)"/> <button>Do It</button>
                 </p>
             </article>
         </section>
         <canvas id="demo1-canvas"></canvas>
-        <button id="demo1-start-button">Start</button>
-        <button id="demo1-stop-button">Stop</button>
-        <button id="demo1-reset-button">Reset</button>
+        <section id="about">
+            <article>
+                <h3>About me,</h3>
+                <p>
+                    I'm a patient individual who's passionate about programming and the challenges it tends to throw at me.
+                    I would like to see myself as a good person who wants to do everything to be a good teammate and friend, although it takes
+                    me a while to warm up to people at first.
+                </p>
+
+                My hobbies include:
+                <ul>
+                    <li>Walking at random for large distances</li>
+                    <li>Chatting with friends</li>
+                    <li>Playing games with friends</li>
+                    <li>Origami</li>
+                    <li>Writing (poorly)</li>
+                    <li>Watching films/series</li>
+                    <li>Programming (Ofcourse)</li>
+                    <li>Trying new things like youtube, music editing, photoshop and other software..</li>
+                    <li>Listening to music</li>
+                </ul>
+
+                My Skills:
+                <ul>
+                    <li>Patience</li>
+                    <li>Rational and creative thinking</li>
+                    <li>Being able to handle criticism</li>
+                    <li>Focused on improving myself</li>
+                    <li>Wanting to be a useful addition to the group of people around me</li>
+                    <li>Always wanting to know more</li>
+                </ul>
+
+                Lesser traits:
+                <ul>
+                    <li>Taking a while to warm up to people i just met</li>
+                    <li>Feeling not good enough sometimes</li>
+                </ul>
+
+                Work history:
+                <ul>
+                    <li>
+                        Worked one year for a woodworking factory which was declared for bankruptcy,
+                        so i went on to do something with my new found passion for programming.
+                        This led me to the course i'm in now, which will enable me to get a graduate in IT,
+                        the course is still ongoing for about another 6 months.
+                    </li>
+                    <li>
+                        I hope to be able to add your company's name to this list!
+                    </li>
+                </ul>
+
+
+                Some of my goals:
+                <ul>
+                    <li>Getting a graduate in IT</li>
+                    <li>Getting a job (of course)</li>
+                    <li>Consulting a Dietitian (i'm underweight)</li>
+                    <li>Saving to buy or build a house</li>
+                    <li>Being able to get back into skiing</li>
+                </ul>
+
+            </article>
+
+        </section>
     </div>
     <footer> Made by me </footer>
     <script type="text/javascript" src="js/main.js"></script>
